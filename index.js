@@ -1,14 +1,28 @@
-const http = require("http");
+// const http = require("http");
+//
+// const greet = (req, res) => {
+//   if (/^\/hello$/.test(req.url) && req.method === "GET") {
+//     res.writeHead(200, { "Content-Type": "text/html" });
+//     res.write("Hello World");
+//     res.end();
+//   }
+// }
+//
+// const server = http.createServer(greet);
+//
+// server.listen(3000);
 
-const greet = (req, res) => {
-  console.log(req.method, "METHOD");
-  console.log(req.url, "URL");
+const express = require("express");
+const app = express();
 
-  res.writeHead(200, { "Content-Type": "text/html" });
-  res.write("Hello World");
-  res.end();
-}
+// Configure Node to render using EJS
+app.set("view engine", "ejs");
 
-const server = http.createServer(greet);
+app.get("/hello/:name", (req, res) => {
+  // res.send(`Hello ${req.params.name}`);
+  res.render("index", {
+    name: req.params.name
+  });
+});
 
-server.listen(3000);
+app.listen(3000);
