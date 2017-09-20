@@ -20,9 +20,14 @@ app.set("view engine", "ejs");
 
 app.get("/hello/:name", (req, res) => {
   // res.send(`Hello ${req.params.name}`);
-  res.render("index", {
-    name: req.params.name
-  });
+
+  // Server-side rendering
+  // res.render("index", {
+  //   name: req.params.name
+  // });
+
+  // Client-side rendering
+  res.status(200).json({ name: req.params.name });
 });
 
 app.listen(3000);
